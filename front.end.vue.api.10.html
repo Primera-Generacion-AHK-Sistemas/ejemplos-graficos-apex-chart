@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>jQuery Ajax Example</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.35/dayjs.min.js" integrity="sha512-nG86d7fodOg4f3fZF796WwIj6WwxdWI2DCXCarXZU05/UNHzC2CHQkD6dNdj6Ahaurrbed66rsvTt6r58RQ5WA==" crossorigin="anonymous"></script>
 
     <style>
         /*@import url('https://fonts.googleapis.com/css?family=Lato:300,400,600,700');*/
@@ -97,6 +96,8 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.35/dayjs.min.js" integrity="sha512-nG86d7fodOg4f3fZF796WwIj6WwxdWI2DCXCarXZU05/UNHzC2CHQkD6dNdj6Ahaurrbed66rsvTt6r58RQ5WA==" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
@@ -107,6 +108,10 @@
 
         var options = {
             series: [],
+            chart: {
+                type: 'candlestick',
+                height: 350
+            },
             dataLabels: {
                 enabled: false
             },
@@ -116,43 +121,20 @@
             noData: {
                 text: 'Loading...'
             },
-            /*
-            xaxis: {
-                type: 'datetime',
-                categories: ["Jan", "Feb", "Mar","Abril","Mayo","Mayo","Mayo","Mayo","Mayo","Mayo","Mayo", "Dec"]
-            },
-            */
-            chart: {
-                type: 'candlestick',
-                height: 350,
-                width: "100%",
-                type: "area",
-                animations: {
-                    initialAnimation: {
-                        enabled: false
-                    }
+            yaxis: {
+                tooltip: {
+                    enabled: true
                 }
             },
-            /*
             xaxis: {
-              type: 'category',
+              type: 'datetime',
               labels: {
                 formatter: function(val) {
-                  return dayjs(val).format('DD MMM')
+                  return dayjs(val).format('MMM DD HH:mm')
                 }
               }
-            },
-            */
-            xaxis: {
-                type: 'datetime'
-            },
-            yaxis: {
-              tooltip: {
-                enabled: true
-              }
             }
-        }
-        
+        };
         /*
         ,
             chart: {
