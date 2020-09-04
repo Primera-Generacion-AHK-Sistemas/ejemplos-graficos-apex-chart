@@ -107,8 +107,8 @@
         var options = {
             series: [],
             chart: {
-                height: 350,
-                type: 'bar',
+                type: 'candlestick',
+                height: 350
             },
             dataLabels: {
                 enabled: false
@@ -120,11 +120,11 @@
                 text: 'Loading...'
             },
             xaxis: {
-                type: 'category',
-                tickPlacement: 'on',
-                labels: {
-                    rotate: -45,
-                    rotateAlways: true
+                type: 'datetime'
+            },
+            yaxis: {
+                tooltip: {
+                    enabled: true
                 }
             }
         };
@@ -154,11 +154,14 @@
         var link = 'http://my-json-server.typicode.com/apexcharts/apexcharts.js/yearly'
         var link = "https://raw.githubusercontent.com/apexcharts/apexcharts.js/master/db.json"
         var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2020/08/15&end_date=2020/09/04"
+        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT"
+        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2019/01/01"
         $.getJSON(link, function (response) {
             chart.updateSeries([{
-                name: 'Sales',
-                data: response.data
+                name: response.ticker,
+                data: response.data,
             }])
+            chart.text = response.ticker
         });
         //https://apexcharts.com/docs/update-charts-from-json-api-ajax/
     </script>
