@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #chart {
+            max-width: 650px;
+            margin: 35px auto;
+        }
+    </style>    
+    <script>
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+            )
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+            )
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+            )
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="chart">
+    </div>
+    
+    
+    <script>
+        var options = {
+            chart: {
+                height: 380,
+                width: "100%",
+                type: "area",
+                animations: {
+                    initialAnimation: {
+                        enabled: false
+                    }
+                }
+            },
+            series: [
+                {
+                    name: "Series 1",
+                    data: [
+                        [1486684800000, 34],
+                        [1486771200000, 43],
+                        [1486857600000, 31],
+                        [1486944000000, 43],
+                        [1487030400000, 33],
+                        [1487116800000, 52]
+                    ]
+                }
+            ],
+            xaxis: {
+                type: 'datetime'
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+        chart.render();
+        var link = 'http://my-json-server.typicode.com/apexcharts/apexcharts.js/yearly'
+        var link = "https://raw.githubusercontent.com/apexcharts/apexcharts.js/master/db.json"
+        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2020/08/15&end_date=2020/09/04"
+        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT"
+        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2019/01/01"
+        $.getJSON(link, function (response) {
+            console.log(response)
+            chart.updateSeries([{
+                name: response.ticker,
+                data: response.data,
+            }])
+
+            chart.updateOptions({
+                title: {
+                    text: response.name
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>
