@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #chart {
+            max-width: 760px;
+            margin: 35px auto;
+            opacity: 0.9;
+        }
+
+        #timeline-chart .apexcharts-toolbar {
+            opacity: 1;
+            border: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app-6">
+        <p>{{ message }}</p>
+        <input v-model="message">
+    </div>
+
+
+    <script>
+        var app6 = new Vue({
+            el: '#app-6',
+            data: {
+                message: 'Hello Vue!'
+            }
+        })
+    // https://codepen.io/search/pens?q=apexcharts
+    // https://photon.komoot.de/api/?q=cordoba&limit=1
+    </script>
+
+    <div id="chart2"></div>
+
+    <apexchart type="candlestick" height="350" :options="chartOptions" :series="series"></apexchart>
+    <script>
+
+
+        // https://apexcharts.com/vue-chart-demos/candlestick-charts/basic/
+
+    
+        $datos = null
+
+        $TheLinkToApi = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2020/08/15&end_date=2020/09/04"
+        //$TheLinkToApi = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT"
+        var myobj = {}
+
+        var flagColumnsFromDBFetched = false
+        $(document).ready(function () {
+            $var = "ColumnNames"
+            $.ajax({
+                url: $TheLinkToApi,
+                method: "get",
+                data: { getData: $var },
+                success: function (data) {
+                    //gg = data
+
+                    myobj = data
+                    console.log(myobj)
+                    //console.log("columns from db has fetched")
+                    flagColumnsFromDBFetched = true
+                    var chart = new ApexCharts(document.querySelector("#chart2"), options2);
+                    chart.render();
+
+                }
+            });
+        });
+        
+        var options2 = {
+            series: myobj,
+            chart: {
+                type: 'candlestick',
+                height: 350
+            },
+            title: {
+                text: 'CandleStick Chart',
+                align: 'left'
+            },
+            xaxis: {
+                type: 'datetime'
+            },
+            yaxis: {
+                tooltip: {
+                    enabled: true
+                }
+            }
+        };
+    </script>
+
+    <div id="chart">
+        <div id="timeline-chart"></div>
+    </div>
+    <script>
+
+        var options = {
+            chart: {
+                type: "area",
+                height: 300,
+                foreColor: "#999",
+                stacked: true,
+                dropShadow: {
+                    enabled: true,
+                    enabledSeries: [0],
+                    top: -2,
+                    left: 2,
+                    blur: 5,
+                    opacity: 0.06
+                }
+            },
+            colors: ['#00E396', '#0090FF'],
+            stroke: {
+                curve: "smooth",
+                width: 3
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series: [{
+                name: 'Total Views',
+                data: generateDayWiseTimeSeries(0, 18)
+            }, {
+                name: 'Unique Views',
+                data: generateDayWiseTimeSeries(1, 18)
+            }],
+            markers: {
+                size: 0,
+                strokeColor: "#fff",
+                strokeWidth: 3,
+                strokeOpacity: 1,
+                fillOpacity: 1,
+                hover: {
+                    size: 6
+                }
+            },
+            xaxis: {
+                type: "datetime",
+                axisBorder: {
+                    show: false
+                },
+                axisTicks: {
+                    show: false
+                }
+            },
+            yaxis: {
+                labels: {
+                    offsetX: 14,
+                    offsetY: -5
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+            grid: {
+                padding: {
+                    left: -5,
+                    right: 5
+                }
+            },
+            tooltip: {
+                x: {
+                    format: "dd MMM yyyy"
+                },
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left'
+            },
+            fill: {
+                type: "solid",
+                fillOpacity: 0.7
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#timeline-chart"), options);
+
+        chart.render();
+
+        function generateDayWiseTimeSeries(s, count) {
+            var values = [[
+                4, 3, 10, 9, 29, 19, 25, 9, 12, 7, 19, 5, 13, 9, 17, 2, 7, 5
+            ], [
+                2, 3, 8, 7, 22, 16, 23, 7, 11, 5, 12, 5, 10, 4, 15, 2, 6, 2
+            ]];
+            var i = 0;
+            var series = [];
+            var x = new Date("11 Nov 2012").getTime();
+            while (i < count) {
+                series.push([x, values[s][i]]);
+                x += 86400000;
+                i++;
+            }
+            return series;
+        }
+    </script>
+
+    <div id="chartat"></div>
+
+    <script>
+        var options = {
+            series: [{
+                data: [{
+                    x: 1546275600000, // Wednesday
+                    y: [6629.81, 6650.5, 6623.04, 6633.33]
+                },
+                {
+                    x: 1546362000000, // Thursday
+                    y: [6632.01, 6643.59, 6620, 6630.11]
+                },
+                {
+                    x: 1546448400000, // Friday
+                    y: [6630.71, 6648.95, 6623.34, 6635.65]
+                },
+                // { // SATURDAY : NO DATA
+                //   x: 1546534800000,
+                //   y: [6635.65, 6651, 6629.67, 6638.24]
+                // },
+                // { // SUNDAY : NO DATA
+                //   x: 1546621200000,
+                //   y: [6624.53, 6636.03, 6621.68, 6624.31]
+                // },
+                {
+                    x: 1546707600000, // Monday
+                    y: [6624.61, 6632.2, 6617, 6626.02]
+                },
+                {
+                    x: 1546794000000, // Tuesday
+                    y: [6635.65, 6651, 6629.67, 6638.24]
+                },
+                ]
+            }],
+            chart: {
+                type: 'candlestick',
+                height: 350
+            },
+            title: {
+                text: 'Stock Chart last 7 days',
+                align: 'Center'
+            },
+            xaxis: {
+                type: 'datetime'
+            },
+            yaxis: {
+                tooltip: {
+                    enabled: true
+                }
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chartat"), options);
+        chart.render();
+    </script>
+    <script>
+        
+
+        /*
+        */
+    </script>
+</body>
+
+</html>
