@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>jQuery Ajax Example</title>
 
-    <link href="../../assets/styles.css" rel="stylesheet" />
     <style>
         /*@import url('https://fonts.googleapis.com/css?family=Lato:300,400,600,700');*/
 
@@ -132,13 +131,13 @@
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
-        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2020/08/15&end_date=2020/09/04"
         var link = 'http://my-json-server.typicode.com/apexcharts/apexcharts.js/yearly'
         var link = "https://raw.githubusercontent.com/apexcharts/apexcharts.js/master/db.json"
+        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2020/08/15&end_date=2020/09/04"
         $.getJSON(link, function (response) {
             chart.updateSeries([{
                 name: 'Sales',
-                data: response.yearly
+                data: response.data
             }])
         });
         //https://apexcharts.com/docs/update-charts-from-json-api-ajax/
