@@ -114,18 +114,19 @@
                 enabled: false
             },
             title: {
-                text: 'Ajax Example',
+                text: '',
             },
             noData: {
                 text: 'Loading...'
-            },
-            xaxis: {
-                type: 'datetime'
             },
             yaxis: {
                 tooltip: {
                     enabled: true
                 }
+            },
+            xaxis: {
+                type: 'datetime',
+                categories: ["Jan", "Feb", "Mar","Abril","Mayo","Mayo","Mayo","Mayo","Mayo","Mayo","Mayo", "Dec"]
             }
         };
         /*
@@ -161,7 +162,12 @@
                 name: response.ticker,
                 data: response.data,
             }])
-            chart.text = response.ticker
+
+            chart.updateOptions({
+                title: {
+                    text: response.name
+                }
+            })
         });
         //https://apexcharts.com/docs/update-charts-from-json-api-ajax/
     </script>
