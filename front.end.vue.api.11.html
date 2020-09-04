@@ -320,8 +320,8 @@
         var link = "https://raw.githubusercontent.com/apexcharts/apexcharts.js/master/db.json"
         var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2020/08/15&end_date=2020/09/04"
         var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT"
-        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2019/01/01"
         var link = "http://127.0.0.1:5000/api/live-price?ticker=MSFT&start_date=2020/08/15&end_date=2020/09/04"
+        var link = "https://flask-yahoo-fin.herokuapp.com/api/live-price?ticker=MSFT&start_date=2019/01/01"
         $.getJSON(link, function (response) {
             console.log(response)
             chart.updateSeries([{
