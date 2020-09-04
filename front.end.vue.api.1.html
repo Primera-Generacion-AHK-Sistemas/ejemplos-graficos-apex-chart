@@ -132,12 +132,12 @@
 
         var chart = new ApexCharts(document.querySelector("#chart"), options);
         chart.render();
-
-
-        $.getJSON('http://my-json-server.typicode.com/apexcharts/apexcharts.js/yearly', function (response) {
+        var link = 'http://my-json-server.typicode.com/apexcharts/apexcharts.js/yearly'
+        var link = "https://raw.githubusercontent.com/apexcharts/apexcharts.js/master/db.json"
+        $.getJSON(link, function (response) {
             chart.updateSeries([{
                 name: 'Sales',
-                data: response
+                data: response.yearly
             }])
         });
 
