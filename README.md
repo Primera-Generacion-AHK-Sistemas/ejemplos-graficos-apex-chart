@@ -2,6 +2,8 @@
 
 https://primera-generacion-ahk-sistemas.github.io/ejemplos-graficos-apex-chart/front.end.vue.1.html
 
+https://primera-generacion-ahk-sistemas.github.io/ejemplos-graficos-apex-chart/front.end.vue.api.11.html
+
 POSSIBLE ui
 
 
